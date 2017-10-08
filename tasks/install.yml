@@ -16,7 +16,7 @@
     mode: 0755
 
 - name: Run NVM installation script
-  command: "{{ nvm_tmp_path }}/install.sh"
+  command: "bash {{ nvm_tmp_path }}/install.sh"
   args:
     creates: "{{ nvm_dir }}"
     chdir: "{{ nvm_tmp_path }}"
