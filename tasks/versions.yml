@@ -1,0 +1,13 @@
+---
+
+- name: Install default Node.js versions with NVM
+  environment:
+    NVM_DIR: "{{ nvm_dir }}"
+  shell: "source {{ nvm_dest }}/nvm.sh && nvm install {{ item }}"
+  with_items: "{{ nvm_node_versions }}"
+
+- name: Set default Node.js version {{ nvm_default_node_version }} to be used in a new shell
+  environment:
+    NVM_DIR: "{{ nvm_dir }}"
+  shell: "source {{ nvm_dest }}/nvm.sh && nvm alias default {{ nvm_default_node_version }}"
+
