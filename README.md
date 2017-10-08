@@ -1,7 +1,12 @@
 markosamuli.nvm
 ===============
 
-This Ansible role installs Node.js with NVM on macOS or Ubuntu Developer machine.
+[![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=master)](https://travis-ci.org/markosamuli/ansible-nvm)
+
+
+Ansible role to install [Node.js](https://nodejs.org/en/) with [NVM](https://github.com/creationix/nvm) on macOS or Ubuntu Developer machine.
+
+It doesn't use [Homebrew](https://brew.sh/) for installing nvm on macOS as it's not a support method by the upstream.
 
 Role Variables
 --------------
