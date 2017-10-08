@@ -10,3 +10,9 @@ nvm_shell_init: yes
 
 # Global NPM packages to install
 nvm_npm_global_packages: []
+
+# Temp path
+nvm_tmp_path: /tmp/install_nvm
+
+# NVM version to install
+nvm_version: "v0.33.5"

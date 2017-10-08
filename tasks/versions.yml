@@ -3,11 +3,25 @@
 - name: Install default Node.js versions with NVM
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dest }}/nvm.sh && nvm install {{ item }}"
+  shell: "source {{ nvm_dir }}/nvm.sh && nvm install {{ item }}"
   with_items: "{{ nvm_node_versions }}"
+  register: nvm_install_result
+  changed_when: "nvm_install_result.stdout|search('Downloading and installing node')"
 
-- name: Set default Node.js version {{ nvm_default_node_version }} to be used in a new shell
+- name: Set default Node.js version to be used in a new shell
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dest }}/nvm.sh && nvm alias default {{ nvm_default_node_version }}"
+  shell: "source {{ nvm_dir }}/nvm.sh && nvm alias default {{ nvm_default_node_version }}"
+  when: nvm_install_result.changed
+
+- name: Get installed default Node.js version
+  environment:
+    NVM_DIR: "{{ nvm_dir }}"
+  shell: "source {{ nvm_dir }}/nvm.sh && nvm version {{ nvm_default_node_version }}"
+  register: nvm_version_result
+  changed_when: no
+
+- name: Set installed NVM Node.js version in a fact
+  set_fact:
+    nvm_node_version: "{{ nvm_version_result.stdout }}"
 

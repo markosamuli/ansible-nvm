@@ -1,19 +1,27 @@
 ---
 
-- name: Does NVM already exists?
-  stat:
-    path: "{{ nvm_install_dir }}"
-  register: nvm_st
+- name: Ensure NVM installation temp path exists
+  file:
+    path: "{{ nvm_tmp_path }}"
+    state: directory
 
 - name: Download NVM installation script
   get_url:
-    dest: "{{ nvm_home }}"
+    dest: "{{ nvm_tmp_path }}"
     url: https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh
-  when: not nvm_st.stat.exists
+
+- name: Set installation script permissions
+  file:
+    path: "{{ nvm_tmp_path }}/install.sh"
+    mode: 0755
 
 - name: Run NVM installation script
-  command: "{{ nvm_home }}/install.sh"
+  command: "{{ nvm_tmp_path }}/install.sh"
   args:
-    creates: "{{ nvm_install_dir }}"
-    chdir: "{{ nvm_home }}"
-  when: not nvm_st.stat.exists
+    creates: "{{ nvm_dir }}"
+    chdir: "{{ nvm_tmp_path }}"
+
+- name: Delete NVM installation temp
+  file:
+    path: "{{ nvm_tmp_path }}"
+    state: absent

@@ -1,14 +1,8 @@
 ---
 
-- name: Get installed NVM Node.js version for {{ nvm_default_node_version }}
-  environment:
-    NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dest }}/nvm.sh && nvm version {{ nvm_default_node_version }}"
-  register: nvm_node_version
-
 - name: Installing global NPM packages
   npm:
     name: "{{ item }}"
-    executable: "{{ nvm_dir }}/versions/node/{{ nvm_node_version.sdout }}/bin/npm"
+    executable: "{{ nvm_dir }}/versions/node/{{ nvm_node_version }}/bin/npm"
     global: yes
   with_items: "{{ nvm_npm_global_packages }}"

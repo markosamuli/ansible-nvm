@@ -3,11 +3,21 @@
 - name: Load variables for the target system
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-    - "default.yml"
+    - files:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - "default.yml"
+      paths: vars
 
+# Check if NMV directory already exists
+- name: Does NVM already exists?
+  stat:
+    path: "{{ nvm_dir }}"
+  register: nvm_st
+
+# Install NVM
 - include: install.yml
+  when: not nvm_st.stat.exists
 
 # Configure shell
 - include: shell.yml
