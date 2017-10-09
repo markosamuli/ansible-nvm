@@ -26,5 +26,7 @@
 # Install default Node.js versions
 - include: versions.yml
 
+# Disable NPM installation as it's failing on Ansible 2.4.0.0
+# https://github.com/ansible/ansible/issues/29240
 # Install default NPM packages
-- include: npm.yml
+# - include: npm.yml
