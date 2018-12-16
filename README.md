@@ -1,15 +1,16 @@
-markosamuli.nvm
-===============
+# markosamuli.nvm
 
 [![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=master)](https://travis-ci.org/markosamuli/ansible-nvm)
 
+Ansible role to install [Node.js](https://nodejs.org/en/) with
+[NVM](https://github.com/creationix/nvm) on macOS or Ubuntu Developer machines.
 
-Ansible role to install [Node.js](https://nodejs.org/en/) with [NVM](https://github.com/creationix/nvm) on macOS or Ubuntu Developer machine.
+It doesn't use [Homebrew](https://brew.sh/) for installing nvm on macOS as
+it's not a support method by the upstream.
 
-It doesn't use [Homebrew](https://brew.sh/) for installing nvm on macOS as it's not a support method by the upstream.
+Git and cURL are installed if missing on the target system.
 
-Role Variables
---------------
+## Role Variables
 
 ```yaml
 # We're installing stable Node.js version by default
@@ -26,21 +27,20 @@ nvm_shell_profile_scripts:
   - .zshrc
 ```
 
-Example Playbook
-----------------
+## Example Playbook
 
-    - hosts: localhost
-      connection: local
-      roles:
-         - { role: markosamuli.nvm }
+```yaml
+- hosts: localhost
+  connection: local
+  roles:
+      - { role: markosamuli.nvm }
+```
 
-License
--------
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 - [@markosamuli](https://github.com/markosamuli)
 

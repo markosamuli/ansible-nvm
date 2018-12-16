@@ -9,6 +9,12 @@
       - "default.yml"
       paths: vars
 
+- include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include: darwin.yml
+  when: ansible_os_family == 'Darwin'
+
 - name: Does NVM directory already exists?
   stat:
     path: "{{ nvm_dir }}"
