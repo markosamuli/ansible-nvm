@@ -9,15 +9,34 @@
       - "default.yml"
       paths: vars
 
-# Check if NMV directory already exists
-- name: Does NVM already exists?
+- include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include: darwin.yml
+  when: ansible_os_family == 'Darwin'
+
+- name: Does NVM directory already exists?
   stat:
     path: "{{ nvm_dir }}"
   register: nvm_st
+  changed_when: False
+
+- name: Get installed NVM version
+  shell: "git describe --tags `git rev-list --tags --max-count=1`"
+  args:
+    chdir: "{{ nvm_dir }}"
+  register: nvm_installed_version
+  when: nvm_st.stat.exists
+  changed_when: False
+
+- name: Is NVM running latest version?
+  set_fact:
+    nvm_version_match: "{{ nvm_installed_version.stdout == nvm_version }}"
+  when: nvm_st.stat.exists
 
 # Install NVM
 - include: install.yml
-  when: not nvm_st.stat.exists
+  when: not nvm_st.stat.exists or not nvm_version_match
 
 # Configure shell
 - include: shell.yml
@@ -25,8 +44,3 @@
 
 # Install default Node.js versions
 - include: versions.yml
-
-# Disable NPM installation as it's failing on Ansible 2.4.0.0
-# https://github.com/ansible/ansible/issues/29240
-# Install default NPM packages
-# - include: npm.yml

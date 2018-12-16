@@ -9,6 +9,7 @@
   get_url:
     dest: "{{ nvm_tmp_path }}"
     url: https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh
+    checksum: "{{ nvm_install_checksum }}"
 
 - name: Set installation script permissions
   file:
@@ -18,7 +19,6 @@
 - name: Run NVM installation script
   command: "bash {{ nvm_tmp_path }}/install.sh"
   args:
-    creates: "{{ nvm_dir }}"
     chdir: "{{ nvm_tmp_path }}"
 
 - name: Delete NVM installation temp

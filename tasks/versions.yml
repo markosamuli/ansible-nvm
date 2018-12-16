@@ -8,7 +8,7 @@
     executable: /bin/bash
   with_items: "{{ nvm_node_versions }}"
   register: nvm_install_result
-  changed_when: "nvm_install_result.stdout|search('Downloading and installing node')"
+  changed_when: "nvm_install_result.stdout is search('Downloading and installing node')"
 
 - name: Set default Node.js version to be used in a new shell
   environment:
