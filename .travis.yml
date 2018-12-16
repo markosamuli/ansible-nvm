@@ -17,6 +17,10 @@ matrix:
       dist: trusty
       sudo: required
       env: ANSIBLE_VERSION=2.4.0.0
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: ANSIBLE_VERSION=2.7.4.0
     - os: osx
 
 # Install Ansible and Python development packages
@@ -71,5 +75,3 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-notifications:
-  email: false
