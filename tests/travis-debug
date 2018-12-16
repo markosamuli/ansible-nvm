@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT=$(dirname $DIR)
+
+ROLE_NAME=ansible-nvm
+IMAGE_NAME=${ROLE_NAME}-travis-debug
+CONTAINER_NAME=${ROLE_NAME}-travis-debug
+
+set -e
+
+cd $PROJECT_ROOT
+
+docker build -t ${IMAGE_NAME} tests/travis
+
+docker run \
+  --name ${CONTAINER_NAME} \
+  -v $(pwd):/home/travis/${ROLE_NAME} \
+  -d \
+  -it \
+  --rm \
+  ${IMAGE_NAME} \
+  /sbin/init
+
+sleep 1
+
+docker exec -it ${CONTAINER_NAME} bash -l
+
+docker stop ${CONTAINER_NAME}
