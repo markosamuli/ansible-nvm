@@ -1,6 +1,8 @@
 # markosamuli.nvm
 
 [![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=master)](https://travis-ci.org/markosamuli/ansible-nvm)
+[![GitHub release](https://img.shields.io/github/release/markosamuli/ansible-nvm.svg)](https://github.com/markosamuli/ansible-nvm/releases)
+[![License](https://img.shields.io/github/license/markosamuli/ansible-nvm.svg)](https://github.com/markosamuli/ansible-nvm/blob/master/LICENSE)
 
 Ansible role to install [Node.js](https://nodejs.org/en/) with
 [NVM](https://github.com/creationix/nvm) on macOS or Ubuntu Developer machines.
@@ -38,7 +40,7 @@ nvm_shell_profile_scripts:
 
 ## License
 
-MIT
+[MIT](LICENSE)
 
 ## Author Information
 
