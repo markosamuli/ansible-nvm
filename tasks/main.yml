@@ -22,7 +22,7 @@
   changed_when: False
 
 - name: Get installed NVM version
-  shell: "git describe --tags `git rev-list --tags --max-count=1`"
+  shell: "git describe --tags `git rev-list --tags --max-count=1`" # noqa 303
   args:
     chdir: "{{ nvm_dir }}"
   register: nvm_installed_version
