@@ -1,6 +1,8 @@
 # markosamuli.nvm
 
 [![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=master)](https://travis-ci.org/markosamuli/ansible-nvm)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/38353.svg)](https://galaxy.ansible.com/markosamuli/nvm)
+[![Ansible Role](https://img.shields.io/ansible/role/38353.svg)](https://galaxy.ansible.com/markosamuli/nvm)
 [![GitHub release](https://img.shields.io/github/release/markosamuli/ansible-nvm.svg)](https://github.com/markosamuli/ansible-nvm/releases)
 [![License](https://img.shields.io/github/license/markosamuli/ansible-nvm.svg)](https://github.com/markosamuli/ansible-nvm/blob/master/LICENSE)
 
