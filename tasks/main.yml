@@ -24,7 +24,7 @@
   changed_when: False
 
 - name: Get installed NVM revision
-  shell: "git rev-list --tags --max-count=1" # noqa 303
+  shell: "git rev-list --tags --max-count=1" # noqa 303 305
   args:
     chdir: "{{ nvm_dir }}"
   register: nvm_installed_revision
@@ -32,7 +32,7 @@
   changed_when: False
 
 - name: Get installed NVM version
-  shell: "git describe --tags {{ nvm_installed_revision.stdout }}" # noqa 303
+  shell: "git describe --tags {{ nvm_installed_revision.stdout }}" # noqa 303 305
   args:
     chdir: "{{ nvm_dir }}"
   register: nvm_installed_version
