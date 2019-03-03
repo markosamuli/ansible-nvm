@@ -38,11 +38,14 @@ nvm_shell_profile_scripts:
       - { role: markosamuli.nvm }
 ```
 
+## Changes
+
+* [CHANGELOG.md](CHANGELOG.md)
+
 ## License
 
-[MIT](LICENSE)
+* [MIT](LICENSE)
 
 ## Author Information
 
-- [@markosamuli](https://github.com/markosamuli)
-
+* [@markosamuli](https://github.com/markosamuli)

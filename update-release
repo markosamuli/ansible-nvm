@@ -52,9 +52,11 @@ update_ansible_vars() {
 
     # Update variables
     echo "Updating variables in ${vars_file}"
-    sed -i.save -r "s/^(nvm_version):.*$/\1: \"${version}\"/" \
+    sed -i.save \
+        -r "s/^(nvm_version):.*$/\1: \"${version}\"/" \
         ${vars_file}
-    sed -i.save -r "s/^(nvm_install_checksum):.*$/\1: \"sha256:${checksum}\"/" \
+    sed -i.save \
+        -r "s/^(nvm_install_checksum):.*$/\1: \"sha256:${checksum}\"/" \
         ${vars_file}
     rm ${vars_file}.save
 }

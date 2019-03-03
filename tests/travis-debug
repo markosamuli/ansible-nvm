@@ -14,13 +14,13 @@ cd $PROJECT_ROOT
 docker build -t ${IMAGE_NAME} tests/travis
 
 docker run \
-  --name ${CONTAINER_NAME} \
-  -v $(pwd):/home/travis/${ROLE_NAME} \
-  -d \
-  -it \
-  --rm \
-  ${IMAGE_NAME} \
-  /sbin/init
+    --name ${CONTAINER_NAME} \
+    -v $(pwd):/home/travis/${ROLE_NAME} \
+    -d \
+    -it \
+    --rm \
+    ${IMAGE_NAME} \
+    /sbin/init
 
 sleep 1
 

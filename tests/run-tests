@@ -74,10 +74,9 @@ set -e
 printf '[defaults]\nroles_path=../\n' > ansible.cfg
 
 images=( bionic xenial )
-for i in "${images[@]}"
-do
-  build $i
-  start $i
-  run_tests $i
-  stop $i
+for i in "${images[@]}"; do
+    build $i
+    start $i
+    run_tests $i
+    stop $i
 done

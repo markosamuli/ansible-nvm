@@ -20,6 +20,7 @@
   command: "bash {{ nvm_tmp_path }}/install.sh"
   args:
     chdir: "{{ nvm_tmp_path }}"
+  changed_when: True
 
 - name: Delete NVM installation temp
   file:
