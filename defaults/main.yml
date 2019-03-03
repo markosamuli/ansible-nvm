@@ -1,4 +1,5 @@
 ---
+# defaults file for markosamuli.nvm
 
 # We're installing stable Node.js version by default
 nvm_default_node_version: stable
