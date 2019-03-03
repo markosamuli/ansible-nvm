@@ -9,10 +9,12 @@
       - "default.yml"
       paths: vars
 
-- include: ubuntu.yml
+- name: Ubuntu dependencies
+  include_tasks: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- include: darwin.yml
+- name: macOS dependencies
+  include_tasks: darwin.yml
   when: ansible_os_family == 'Darwin'
 
 - name: Does NVM directory already exists?
@@ -34,13 +36,13 @@
     nvm_version_match: "{{ nvm_installed_version.stdout == nvm_version }}"
   when: nvm_st.stat.exists
 
-# Install NVM
-- include: install.yml
+- name: Install NVM
+  include_tasks: install.yml
   when: not nvm_st.stat.exists or not nvm_version_match
 
-# Configure shell
-- include: shell.yml
+- name: Configure shell
+  include_tasks: shell.yml
   when: nvm_shell_init
 
-# Install default Node.js versions
-- include: versions.yml
+- name: Install default Node.js versions
+  include_tasks: versions.yml
