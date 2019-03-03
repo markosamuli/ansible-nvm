@@ -1,7 +1,8 @@
 # Changelog
 
-## [Unreleased] - 2019-03-03
+## [1.2.0] - 2019-03-03
 
+* install Node.js LTS as default version
 * coding style changes
 * add support for macOS 10.14
 * drop Ansible < 2.4 support
@@ -20,6 +21,7 @@
 * install Git and cURL dependencies
 
 [Unreleased]: https://github.com/markosamuli/ansible-nvm/commits/master
+[1.2.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.2.0
 [1.1.1]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.1.1
 [1.1.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.1.0
 [1.0.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.0.0
