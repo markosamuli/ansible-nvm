@@ -34,7 +34,7 @@
   shell: "source {{ nvm_dir }}/nvm.sh && nvm alias default {{ nvm_default_node_version }}"
   args:
     executable: /bin/bash
-  when: nvm_install_result.changed or nvm_current_default_result.stdout != nvm_expected_default_result.stdout
+  when: nvm_current_default_result.stdout != nvm_expected_default_result.stdout
 
 - name: Get installed default Node.js version
   environment:
