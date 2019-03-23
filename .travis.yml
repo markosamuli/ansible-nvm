@@ -50,6 +50,7 @@ addons:
 branches:
   only:
     - master
+    - develop
     - /^feature\/.*$/
     - /^bugfix\/.*$/
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
