@@ -10,13 +10,17 @@
 | master  | [![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=master)](https://travis-ci.org/markosamuli/ansible-nvm)
 | develop | [![Build Status](https://travis-ci.org/markosamuli/ansible-nvm.svg?branch=develop)](https://travis-ci.org/markosamuli/ansible-nvm)
 
-Ansible role to install [Node.js](https://nodejs.org/en/) with
-[NVM](https://github.com/creationix/nvm) on macOS or Ubuntu Developer machines.
+Ansible role to install [Node.js] with [NVM] on macOS or Ubuntu Developer
+machines.
 
-It doesn't use [Homebrew](https://brew.sh/) for installing nvm on macOS as
-it's not a support method by the upstream.
+The role doesn't use [Homebrew] for installing nvm on macOS as
+it's not a support method in the upstream repository.
 
 Git and cURL are installed if missing on the target system.
+
+[Homebrew]: https://brew.sh
+[Node.js]: https://nodejs.org/en/
+[NVM]: https://github.com/creationix/nvm
 
 ## Role Variables
 
@@ -43,6 +47,16 @@ nvm_shell_profile_scripts:
   roles:
       - { role: markosamuli.nvm }
 ```
+
+## Linux distribution support
+
+I've used this for installing NVM and Node.js on [Pengwin] distribution
+on WSL.
+
+The configuration variables for bash and zsh profiles are missing for
+untested distributions.
+
+[Pengwin]: https://github.com/WhitewaterFoundry/Pengwin
 
 ## Changes
 
