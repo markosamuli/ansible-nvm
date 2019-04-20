@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0] - 2019-04-20
+
+* drop Ubuntu Trusty support and CI builds
+* support [Pengwin] distribution on WSL
+
+[Pengwin]: https://github.com/WhitewaterFoundry/Pengwin
+
 ## [1.2.0] - 2019-03-03
 
 * install Node.js LTS as default version
@@ -21,6 +28,7 @@
 * install Git and cURL dependencies
 
 [Unreleased]: https://github.com/markosamuli/ansible-nvm/commits/master
+[1.3.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.3.0
 [1.2.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.2.0
 [1.1.1]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.1.1
 [1.1.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.1.0
