@@ -25,16 +25,20 @@ matrix:
       dist: xenial
       sudo: required
       env: ANSIBLE_VERSION='<2.8.0'
+
     - name: "macOS 10.12 (Sierra) with Xcode 9.2"
       os: osx
       osx_image: xcode9.2
-      env: BREW_UPGRADE=yes RVM_GPG_IMPORT=yes
+      env: RVM_GPG_IMPORT=yes
     - name: "macOS 10.13 (High Sierra) with Xcode 10.1"
       os: osx
       osx_image: xcode10.1
-    - name: "macOS 10.14 (Mojave) with Xcode 10.2 beta"
+    - name: "macOS 10.14 (Mojave) with Xcode 10.2.1"
       os: osx
       osx_image: xcode10.2
+    - name: "macOS 10.14 (Mojave) with Xcode 11.0"
+      os: osx
+      osx_image: xcode11
 
 # Install Ansible and Python development packages
 addons:
@@ -46,6 +50,7 @@ addons:
     packages:
       - ansible
       - pre-commit
+    update: true
 
 branches:
   only:
@@ -69,15 +74,6 @@ before_install:
       command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
     fi
 
-  # Update Homebrew to fix HOMEBREW_LOGS error
-  - if [[ "$BREW_UPGRADE" == "yes" ]]; then brew update; fi
-
-  # Upgrade Ansible with installed Homebrew
-  - if [[ "$BREW_UPGRADE" == "yes" ]]; then brew upgrade ansible; fi
-
-  # Upgrade pre-commit installed with Homebrew
-  - if [[ "$BREW_UPGRADE" == "yes" ]]; then brew upgrade pre-commit; fi
-
   # Cleanup existing NVM installation
   - unset NVM_CD_FLAGS
   - unset NVM_DIR
@@ -90,7 +86,11 @@ install:
   # Install Ansible with pip on Ubuntu
   - >
     if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then
-      pip install --user ansible${ANSIBLE_VERSION}
+      if [[ -z "$ANSIBLE_VERSION" ]]; then
+        pip install --user ansible
+      else
+        pip install --user ansible${ANSIBLE_VERSION}
+      fi
     fi
 
   # Install pre-commit with pip on Ubuntu
