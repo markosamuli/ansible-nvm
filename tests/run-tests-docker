@@ -5,6 +5,11 @@ PROJECT_ROOT=$(dirname $DIR)
 
 set -e
 
+ansible --version
+
+# Paths in which Ansible will search for Roles
+export ANSIBLE_ROLES_PATH=$(dirname $PROJECT_ROOT)
+
 cd $PROJECT_ROOT
 
 echo "*** Check syntax"

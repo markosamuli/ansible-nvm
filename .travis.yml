@@ -19,7 +19,8 @@ matrix:
       os: linux
       dist: bionic
       sudo: required
-      env: ANSIBLE_VERSION='<2.9.0'
+      # env: ANSIBLE_VERSION='<2.9.0'
+      env: ANSIBLE_VERSION='==2.8.5'
 
     - name: "macOS 10.13 (High Sierra) with Xcode 10.1"
       os: osx
