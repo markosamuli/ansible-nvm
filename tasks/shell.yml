@@ -57,6 +57,7 @@
 - name: Source bash_completion in shell profiles
   lineinfile:
     path: "{{ nvm_home }}/{{ item.item.item }}"
+    # yamllint disable-line rule:line-length
     line: '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion'
     insertafter: '/nvm\.sh'
   with_items: "{{ nvm_shell_profile_bash_completion.results }}"
