@@ -17,7 +17,7 @@ jobs:
         run: |
           pip install virtualenv==16.3.0
           pip install pre-commit
-          snap install shfmt
-          apt install shellcheck
+          sudo snap install shfmt
+          sudo apt-get install -y shellcheck
       - name: Run pre-commit
         run: pre-commit run -a
