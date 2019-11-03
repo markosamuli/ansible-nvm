@@ -6,7 +6,9 @@ PROJECT_ROOT=$(dirname "$DIR")
 set -e
 
 # Paths in which Ansible will search for Roles
-export ANSIBLE_ROLES_PATH=$(dirname "$PROJECT_ROOT")
+ANSIBLE_ROLES_PATH=
+ANSIBLE_ROLES_PATH=$(dirname "$PROJECT_ROOT")
+export ANSIBLE_ROLES_PATH
 
 cd "${PROJECT_ROOT}"
 
