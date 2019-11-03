@@ -13,16 +13,24 @@ error() {
 get_latest_release() {
     local repository=$1
     local url="https://api.github.com/repos/${repository}/releases/latest"
-    curl --silent "${url}" | \
-        grep '"tag_name":' | \
-        sed -E 's/.*"([^"]+)".*/\1/'
+    # @formatter:off
+    if test "$(uname)" = "Darwin"; then
+        curl --silent "${url}" | \
+            grep '"tag_name":' | \
+            sed -E 's/.*"([^"]+)".*/\1/'
+    else
+        curl --silent "${url}" | \
+            grep '"tag_name":' | \
+            sed -r 's/.*"([^"]+)".*/\1/'
+    fi
+    # @formatter:on
 }
 
 ###
 # Get checksum for the install.sh script
 ###
 get_install_checksum() {
-    local repository=creationix/nvm
+    local repository=nvm-sh/nvm
     local release=$1
     local url="https://raw.githubusercontent.com/${repository}/${release}"
     url="${url}/install.sh"
@@ -52,12 +60,21 @@ update_ansible_vars() {
 
     # Update variables
     echo "Updating variables in ${vars_file}"
-    sed -i.save \
-        -r "s/^(nvm_version):.*$/\1: \"${version}\"/" \
-        ${vars_file}
-    sed -i.save \
-        -r "s/^(nvm_install_checksum):.*$/\1: \"sha256:${checksum}\"/" \
-        ${vars_file}
+    if test "$(uname)" = "Darwin"; then
+        sed -i.save \
+            -E "s/^(nvm_version):.*$/\1: \"${version}\"/" \
+            ${vars_file}
+        sed -i.save \
+            -E "s/^(nvm_install_checksum):.*$/\1: \"sha256:${checksum}\"/" \
+            ${vars_file}
+    else
+        sed -i.save \
+            -r "s/^(nvm_version):.*$/\1: \"${version}\"/" \
+            ${vars_file}
+        sed -i.save \
+            -r "s/^(nvm_install_checksum):.*$/\1: \"sha256:${checksum}\"/" \
+            ${vars_file}
+    fi
     rm ${vars_file}.save
 }
 
@@ -66,7 +83,7 @@ update_ansible_vars() {
 ###
 latest_nvm_version() {
     local latest_release=""
-    latest_release=$(get_latest_release creationix/nvm)
+    latest_release=$(get_latest_release nvm-sh/nvm)
     [ -z "${latest_release}" ] && {
         error "Failed to get latest release from GitHub"; return 1;
     }
