@@ -13,6 +13,9 @@ addons:
     packages:
       - python-pip
       - python-dev
+      - shellcheck
+  snaps:
+    - shfmt
   homebrew:
     packages:
       - ansible
@@ -59,9 +62,6 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rvm get head || true; fi
 
 script:
-  # Run pre-commit hooks
-  - pre-commit run -a
-
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
