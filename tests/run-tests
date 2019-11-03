@@ -28,7 +28,8 @@ finish() {
     containers=$(docker ps -q --filter=name="${ROLE_NAME}")
     if [ -n "${containers}" ]; then
         echo "*** Stop all test containers"
-        docker stop "${containers}"
+        # shellcheck disable=SC2086
+        docker stop ${containers}
     fi
 }
 

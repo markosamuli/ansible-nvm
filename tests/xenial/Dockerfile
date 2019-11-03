@@ -1,23 +1,35 @@
 FROM ubuntu:xenial
 
+LABEL name="ansible-nvm-xenial"
+LABEL version="2019-11-03T16:57:36+0000"
+
 RUN apt-get update && apt-get install -y \
     python-minimal \
     python-pip \
     zsh \
     sudo \
+    aptitude \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+ARG user=test
+ARG repository=ansible-nvm
+
 # Create test user
-RUN useradd -m test -s /bin/bash \
- && echo "test:test" | chpasswd \
- && adduser test sudo \
+RUN useradd -m ${user} -s /bin/bash \
+ && echo "${user}:${user}" | chpasswd \
+ && adduser ${user} sudo \
  && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-RUN touch /home/test/.zshrc && chown -R test:test /home/test
+RUN touch /home/${user}/.zshrc \
+ && chown -R ${user}:${user} /home/${user}
 
 # Create directory for code
-RUN mkdir -p /home/test/ansible-nvm ; chown -R test:test /home/test/ansible-nvm
-VOLUME ["/home/test/ansible-nvm"]
+RUN mkdir -p /home/${user}/${repository} \
+ && chown -R ${user}:${user} /home/${user}/${repository}
+VOLUME ["/home/${user}/${repository}"]
 
-RUN pip install ansible==2.8.5
+ARG ansible_version="==2.8.5"
+ENV ANSIBLE_VERSION="${ansible_version}"
+RUN pip install ansible${ANSIBLE_VERSION}
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"

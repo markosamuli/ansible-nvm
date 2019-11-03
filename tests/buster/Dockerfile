@@ -1,6 +1,6 @@
-FROM ubuntu:bionic
+FROM debian:buster
 
-LABEL name="ansible-nvm-bionic"
+LABEL name="ansible-nvm-buster"
 LABEL version="2019-11-03T16:57:36+0000"
 
 RUN apt-get update && apt-get install -y \
