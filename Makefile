@@ -1,6 +1,6 @@
 .PHONY: lint
 lint:
-	@pre-commit run -a
+	@pre-commit run -a -v
 
 .PHONY: test
 test:
