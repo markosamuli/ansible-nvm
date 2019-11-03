@@ -78,7 +78,10 @@ run_tests() {
         "${TEST_HOME}/${ROLE_NAME}/tests/run-tests-docker"
 }
 
-command -v docker >/dev/null || { echo "docker not found"; exit 1; }
+command -v docker >/dev/null || {
+    echo "docker not found"
+    exit 1
+}
 
 trap finish EXIT
 
