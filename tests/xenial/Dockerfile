@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 
 LABEL name="ansible-nvm-xenial"
-LABEL version="2019-11-03T16:57:36+0000"
+LABEL version="2019-11-03"
 
 RUN apt-get update && apt-get install -y \
     python-minimal \
