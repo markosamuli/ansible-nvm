@@ -8,6 +8,7 @@
 - name: Download NVM installation script
   get_url:
     dest: "{{ nvm_tmp_path }}"
+    # yamllint disable-line rule:line-length
     url: https://raw.githubusercontent.com/{{ nvm_repo }}/{{ nvm_version }}/install.sh
     checksum: "{{ nvm_install_checksum }}"
 
