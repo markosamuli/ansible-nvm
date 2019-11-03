@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT=$(dirname "$DIR")
 
 ROLE_NAME="$(basename "$PROJECT_ROOT")"
@@ -9,19 +9,20 @@ TEST_HOME=/home/test
 ###
 # Detect Windows Subsystem for Linux
 ###
-function detect_wsl {
-    if grep -q Microsoft /proc/version; then
-        echo "*** Windows Subsystem for Linux detected"
-        is_wsl=1
-    else
-        is_wsl=0
+detect_wsl() {
+    is_wsl=0
+    if [ -e "/proc/version" ]; then
+        if grep -q Microsoft /proc/version; then
+            echo "*** Windows Subsystem for Linux detected"
+            is_wsl=1
+        fi
     fi
 }
 
 ###
 # Stop all containers
 ###
-function finish {
+finish() {
     local containers=""
     containers=$(docker ps -q --filter=name="${ROLE_NAME}")
     if [ -n "${containers}" ]; then
@@ -33,7 +34,7 @@ function finish {
 ###
 # Stop container
 ###
-function stop {
+stop() {
     local image=$1
     local container_name="${ROLE_NAME}-${image}-tests"
     echo "*** Stop containers"
@@ -43,7 +44,7 @@ function stop {
 ###
 # Build image
 ###
-function build {
+build() {
     local image=$1
     local image_name="${ROLE_NAME}-${image}"
     echo "*** Build image"
@@ -53,7 +54,7 @@ function build {
 ###
 # Start container in the background
 ###
-function start {
+start() {
     local image=$1
     local image_name="${ROLE_NAME}-${image}"
     local container_name="${ROLE_NAME}-${image}-tests"
@@ -67,7 +68,7 @@ function start {
 ###
 # Run tests in the container
 ###
-function run_tests {
+run_tests() {
     local image=$1
     local container_name="${ROLE_NAME}-${image}-tests"
     echo "*** Run tests"
@@ -77,16 +78,18 @@ function run_tests {
         "${TEST_HOME}/${ROLE_NAME}/tests/run-tests-docker"
 }
 
+command -v docker >/dev/null || { echo "docker not found"; exit 1; }
+
 trap finish EXIT
 
 detect_wsl
 
 cd "${DIR}"
 
-images=( "$@" )
+images=("$@")
 if [ ${#images[@]} -eq 0 ]; then
-    images=( */Dockerfile )
-    images=( "${images[@]/\/Dockerfile/}" )
+    images=(*/Dockerfile)
+    images=("${images[@]/\/Dockerfile/}")
 fi
 
 cd "${PROJECT_ROOT}"
