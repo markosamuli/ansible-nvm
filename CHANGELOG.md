@@ -1,10 +1,19 @@
 # Changelog
 
-## [Unreleased] - 2019-11-03
+## [1.4.0] - 2019-11-03
 
 ### Known issues
 
-* Ansible 2.8.6 inline module breaks shell script updating
+The [lineinfile module crashes][ansible-63684] on Ansible 2.8.6 when trying
+to update shell scripts.
+
+The workaround is to use Ansible 2.8.5 until the fix is released or disable
+shell script updates by setting `nvm_shell_init: false` in the role variables.
+
+I've added a test for Ansible version that will fail if trying to run tasks
+from `shell.yml` with Ansible 2.8.6.
+
+[ansible-63684]: https://github.com/ansible/ansible/issues/63684
 
 ### Ansible role changes
 
@@ -22,13 +31,17 @@
 ### CI improvements
 
 * use [shellcheck] and [shfmt] for formatting shell scripts
+* removed [beautysh] pre-commit hook
 * run [pre-commit] hooks only once on Travis CI
 * fix [ansible-lint] installation issues
+* run [pre-commit] with [GitHub Actions]
 
 [shellcheck]: https://github.com/koalaman/shellcheck
 [shfmt]: https://github.com/mvdan/sh
+[beautysh]: https://github.com/lovesegfault/beautysh
 [pre-commit]: https://pre-commit.com
 [ansible-lint]: https://github.com/ansible/ansible-lint
+[GitHub Actions]: https://github.com/actions
 
 ## [1.3.0] - 2019-04-20
 
@@ -58,6 +71,7 @@
 * install Git and cURL dependencies
 
 [Unreleased]: https://github.com/markosamuli/ansible-nvm/commits/develop
+[1.4.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.0
 [1.3.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.3.0
 [1.2.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.2.0
 [1.1.1]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.1.1
