@@ -2,6 +2,10 @@
 
 ## [Unreleased] - 2019-11-03
 
+### Known issues
+
+* Ansible 2.8.6 inline module breaks shell script updating
+
 ### Ansible role changes
 
 * nvm 0.35.0
