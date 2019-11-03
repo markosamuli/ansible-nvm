@@ -7,7 +7,7 @@ nvm_node_versions:
   - "{{ nvm_default_node_version }}"
 
 # Configure shell rc files
-nvm_shell_init: yes
+nvm_shell_init: true
 
 # Global NPM packages to install
 nvm_npm_global_packages: []
@@ -16,7 +16,7 @@ nvm_npm_global_packages: []
 nvm_tmp_path: /tmp/install_nvm
 
 # NVM version to install
-nvm_version: "v0.34.0"
+nvm_version: "v0.35.0"
 
 # sha256sum install.sh
-nvm_install_checksum: "sha256:ef7ad1db40c92f348c0461f24983b71ba0ea7d45d4007a36e484270fa7f81fcf"
+nvm_install_checksum: "sha256:a7009377cb3c0a70e643d5a6b04b14d324360841d05ae6052cb4e0537d18c1e4"
