@@ -8,7 +8,8 @@
     executable: /bin/bash
   with_items: "{{ nvm_node_versions }}"
   register: nvm_install_result
-  changed_when: "nvm_install_result.stdout is search('Downloading and installing node')"
+  changed_when: >-
+    nvm_install_result.stdout is search('Downloading and installing node')
 
 - name: Get current default version from NVM
   environment:
@@ -17,21 +18,25 @@
   args:
     executable: /bin/bash
   register: nvm_current_default_result
-  changed_when: no
+  changed_when: false
 
 - name: Get expected default version from NVM
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dir }}/nvm.sh && nvm version {{ nvm_default_node_version }}"
+  shell: >-
+    source {{ nvm_dir }}/nvm.sh &&
+    nvm version {{ nvm_default_node_version }}
   args:
     executable: /bin/bash
   register: nvm_expected_default_result
-  changed_when: no
+  changed_when: false
 
 - name: Set default Node.js version to be used in a new shell
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dir }}/nvm.sh && nvm alias default {{ nvm_default_node_version }}"
+  shell: >-
+    source {{ nvm_dir }}/nvm.sh &&
+    nvm alias default {{ nvm_default_node_version }}
   args:
     executable: /bin/bash
   when: nvm_current_default_result.stdout != nvm_expected_default_result.stdout
@@ -39,11 +44,13 @@
 - name: Get installed default Node.js version
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dir }}/nvm.sh && nvm version {{ nvm_default_node_version }}"
+  shell: >-
+    source {{ nvm_dir }}/nvm.sh &&
+    nvm version {{ nvm_default_node_version }}
   args:
     executable: /bin/bash
   register: nvm_version_result
-  changed_when: no
+  changed_when: false
 
 - name: Set installed NVM Node.js version in a fact
   set_fact:

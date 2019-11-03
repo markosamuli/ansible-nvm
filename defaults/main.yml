@@ -7,7 +7,7 @@ nvm_node_versions:
   - "{{ nvm_default_node_version }}"
 
 # Configure shell rc files
-nvm_shell_init: yes
+nvm_shell_init: true
 
 # Global NPM packages to install
 nvm_npm_global_packages: []
