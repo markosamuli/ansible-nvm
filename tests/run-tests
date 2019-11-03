@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_ROOT=$(dirname $DIR)
+PROJECT_ROOT=$(dirname "$DIR")
 
-ROLE_NAME="$(basename $PROJECT_ROOT)"
+ROLE_NAME="$(basename "$PROJECT_ROOT")"
 TEST_HOME=/home/test
 
 ###
@@ -23,10 +23,10 @@ function detect_wsl {
 ###
 function finish {
     local containers=""
-    containers=$(docker ps -q --filter=name=${ROLE_NAME})
-    if [ ! -z "${containers}" ]; then
+    containers=$(docker ps -q --filter=name="${ROLE_NAME}")
+    if [ -n "${containers}" ]; then
         echo "*** Stop all test containers"
-        docker stop ${containers}
+        docker stop "${containers}"
     fi
 }
 
@@ -35,9 +35,9 @@ function finish {
 ###
 function stop {
     local image=$1
-    local container_name=${ROLE_NAME}-${image}-tests
+    local container_name="${ROLE_NAME}-${image}-tests"
     echo "*** Stop containers"
-    docker stop ${container_name}
+    docker stop "${container_name}"
 }
 
 ###
@@ -45,9 +45,9 @@ function stop {
 ###
 function build {
     local image=$1
-    local image_name=${ROLE_NAME}-${image}
+    local image_name="${ROLE_NAME}-${image}"
     echo "*** Build image"
-    docker build -t ${image_name} ./tests/${image}
+    docker build -t "${image_name}" "./tests/${image}"
 }
 
 ###
@@ -55,13 +55,13 @@ function build {
 ###
 function start {
     local image=$1
-    local image_name=${ROLE_NAME}-${image}
-    local container_name=${ROLE_NAME}-${image}-tests
+    local image_name="${ROLE_NAME}-${image}"
+    local container_name="${ROLE_NAME}-${image}-tests"
     echo "*** Start container"
     docker run --rm -it -d \
-        -v ${MOUNT_ROOT}:${TEST_HOME}/${ROLE_NAME} \
-        --name ${container_name} \
-        $image_name
+        -v "${MOUNT_ROOT}:${TEST_HOME}/${ROLE_NAME}" \
+        --name "${container_name}" \
+        "${image_name}"
 }
 
 ###
@@ -69,19 +69,19 @@ function start {
 ###
 function run_tests {
     local image=$1
-    local container_name=${ROLE_NAME}-${image}-tests
+    local container_name="${ROLE_NAME}-${image}-tests"
     echo "*** Run tests"
     docker exec -it \
         --user test \
-        ${container_name} \
-        ${TEST_HOME}/${ROLE_NAME}/tests/run-tests-docker
+        "${container_name}" \
+        "${TEST_HOME}/${ROLE_NAME}/tests/run-tests-docker"
 }
 
 trap finish EXIT
 
 detect_wsl
 
-cd $DIR
+cd "${DIR}"
 
 images=( "$@" )
 if [ ${#images[@]} -eq 0 ]; then
@@ -89,7 +89,7 @@ if [ ${#images[@]} -eq 0 ]; then
     images=( "${images[@]/\/Dockerfile/}" )
 fi
 
-cd $PROJECT_ROOT
+cd "${PROJECT_ROOT}"
 
 if [ "${is_wsl}" == "1" ]; then
     MOUNT_ROOT="$(pwd -P | sed 's~/mnt/c/~c:/~')"
@@ -100,11 +100,11 @@ fi
 set -e
 
 for i in "${images[@]}"; do
-    build $i
+    build "$i"
 done
 
 for i in "${images[@]}"; do
-    start $i
-    run_tests $i
-    stop $i
+    start "$i"
+    run_tests "$i"
+    stop "$i"
 done

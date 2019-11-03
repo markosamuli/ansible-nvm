@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PROJECT_ROOT=$(dirname $DIR)
+PROJECT_ROOT=$(dirname "$DIR")
+
+ROLE_NAME="$(basename "$PROJECT_ROOT")"
 
 set -e
 
 ansible --version
 
 # Paths in which Ansible will search for Roles
-export ANSIBLE_ROLES_PATH=$(dirname $PROJECT_ROOT)
+export ANSIBLE_ROLES_PATH="$ROLE_NAME"
 
-cd $PROJECT_ROOT
+cd "$PROJECT_ROOT"
 
 echo "*** Check syntax"
 
@@ -22,6 +24,7 @@ ansible-playbook tests/test.yml -i tests/inventory --connection=local -v
 
 echo "*** Idempotence test"
 
+# shellcheck disable=SC2015
 ansible-playbook tests/test.yml -i tests/inventory --connection=local \
     | grep -q 'changed=0.*failed=0' \
     && (echo 'Idempotence test: pass' && exit 0) \
@@ -30,4 +33,5 @@ ansible-playbook tests/test.yml -i tests/inventory --connection=local \
 
 echo "*** Verify installed Node.js version"
 
-source $HOME/.nvm/nvm.sh && nvm version
+# shellcheck source=/dev/null
+source "$HOME/.nvm/nvm.sh" && nvm version
