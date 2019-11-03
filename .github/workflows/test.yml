@@ -13,9 +13,11 @@ jobs:
         with:
           python-version: '3.x'
           architecture: 'x64'
-      - name: Install virtualenv v16.3.0 to fix ansible-lint install
-        run: pip install virtualenv==16.3.0
-      - name: Install pre-commit
-        run: pip install pre-commit
+      - name: Install dependencies
+        run: |
+          pip install virtualenv==16.3.0
+          pip install pre-commit
+          snap install shfmt
+          apt install shellcheck
       - name: Run pre-commit
         run: pre-commit run -a
