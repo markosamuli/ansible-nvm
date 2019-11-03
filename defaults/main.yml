@@ -16,8 +16,8 @@ nvm_npm_global_packages: []
 nvm_tmp_path: /tmp/install_nvm
 
 # NVM version to install
-nvm_version: "v0.35.0"
+nvm_version: "v0.35.1"
 
 # sha256sum install.sh
 # yamllint disable-line rule:line-length
-nvm_install_checksum: "sha256:a7009377cb3c0a70e643d5a6b04b14d324360841d05ae6052cb4e0537d18c1e4"
+nvm_install_checksum: "sha256:3da9cbca0e07b8075ed6477fdb1b6ca88d4504556b349a4f809063b49bda8715"
