@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.1] - 2019-11-03
+
+### Ansible role changes
+
+* nvm [v0.35.1](https://github.com/nvm-sh/nvm/releases/tag/v0.35.1)
+
+### CI improvements
+
+* add [markdownlint] and [commitlint] pre-commit hooks
+* pretty format JSON files
+
+[markdownlint]: https://github.com/DavidAnson/markdownlint
+[commitlint]: https://commitlint.js.org
+
 ## [1.4.0] - 2019-11-03
 
 ### Known issues
@@ -71,6 +85,7 @@ from `shell.yml` with Ansible 2.8.6.
 * install Git and cURL dependencies
 
 [Unreleased]: https://github.com/markosamuli/ansible-nvm/commits/develop
+[1.4.1]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.1
 [1.4.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.0
 [1.3.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.3.0
 [1.2.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.2.0
