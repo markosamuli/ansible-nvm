@@ -31,7 +31,7 @@ nvm_node_versions:
   - "{{ nvm_default_node_version }}"
 
 # Initialize shell profile scripts
-nvm_init_shell: yes
+nvm_shell_init: yes
 
 # Define the shell profile scripts to initialiaze
 nvm_shell_profile_scripts:
