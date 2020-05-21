@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.2] - 2020-05-21
+
+Fixing documentation that was not pointing to the correct `nvm_shell_init`
+variable.
+
+Thanks [@tgallacher](https://github.com/tgallacher) for spotting this!
+
+### Ansible role changes
+
+* nvm [v0.35.3](https://github.com/nvm-sh/nvm/releases/tag/v0.35.3)
+
 ## [1.4.1] - 2019-11-03
 
 ### Ansible role changes
@@ -85,6 +96,7 @@ from `shell.yml` with Ansible 2.8.6.
 * install Git and cURL dependencies
 
 [Unreleased]: https://github.com/markosamuli/ansible-nvm/commits/develop
+[1.4.2]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.2
 [1.4.1]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.1
 [1.4.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.4.0
 [1.3.0]: https://github.com/markosamuli/ansible-nvm/releases/tag/v1.3.0
