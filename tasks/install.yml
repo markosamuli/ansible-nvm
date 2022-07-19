@@ -22,6 +22,9 @@
   args:
     chdir: "{{ nvm_tmp_path }}"
   changed_when: true
+  environment:
+    # disable built-in functionality to update the shell init scripts, as we have that functionality in this role
+    PROFILE: /dev/null
 
 - name: Delete NVM installation temp
   file:
