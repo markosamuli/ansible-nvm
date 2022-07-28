@@ -3,7 +3,7 @@
 - name: Install default Node.js versions with NVM
   environment:
     NVM_DIR: "{{ nvm_dir }}"
-  shell: "source {{ nvm_dir }}/nvm.sh && nvm install {{ item }}"
+  shell: "source {{ nvm_dir }}/nvm.sh --no-use && nvm install {{ item }}"
   args:
     executable: /bin/bash
   with_items: "{{ nvm_node_versions }}"
